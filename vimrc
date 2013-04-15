@@ -21,10 +21,13 @@ set completeopt=menuone,menu,longest,preview
 
 " configure tags - add additional tags here or comment out not-used ones
 set tags+=~/.vim/tags/cpp
-"set tags+=~/.vim/tags/gl
+set tags+=~/.vim/tags/latex
 "set tags+=~/.vim/tags/sdl
 "set tags+=~/.vim/tags/qt4
 " build tags of your own project with Ctrl-F12
+" p
+map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+command LatexTags !ctags -R --sort=yes --latex-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 
 
@@ -51,9 +54,8 @@ call vundle#rc()
 "let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/vundle'
-
+Bundle 'refactor'
 " My Bundles here:
-"
 " original repos on github
 " Bundle 'tpope/vim-fugitive'
 " Bundle 'Lokaltog/vim-easymotion'
@@ -67,6 +69,7 @@ Bundle 'jcf/vim-latex'
 " vim-scripts repos
 Bundle 'L9'
 Bundle 'FuzzyFinder'
+Bundle 'xolox/vim-session'
 "Bundle 'FindFile'
 " Bundle 'project.tar.gz'
 " non github repos
@@ -94,7 +97,6 @@ autocmd FileType *.h setlocal ft=cpp
 autocmd BufNewFile,BufReadPost *.h,*.ino,*.pde set filetype=cpp"
 
 
-map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 map <F3> :wa<CR>:make<CR>
 map <C-F3> :wa<CR>:chdir ../<CR>:make<CR>
 noremap æ [
@@ -128,8 +130,7 @@ nmap <C-M-Down> <C-w>N
 nmap <C-M-Right> <C-w>v
 nmap <C-M-Left> <C-w>V
 
-
-
+map <F2> mrgg=G'r
 
 "Put these in an autocmd group, so that we can delete them easily.
 "augroup vimrcEx
@@ -153,12 +154,12 @@ autocmd BufReadPost *
 
 " ### FOLDING ###
 set foldmethod=syntax
-set foldnestmax=1
+set foldnestmax=3
+set foldlevel=1000
 
+command Vimrc execute "e ~/.vimrc" 
 
-
-
-
+colorscheme jellybeans
 
 
 " ###### CPPP AUTO COMPLETE #######
